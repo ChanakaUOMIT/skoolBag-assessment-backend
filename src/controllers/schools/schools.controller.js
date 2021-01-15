@@ -7,9 +7,13 @@ import { createSchool, getAllSchools, updateSchool, deleteSchool } from "./schoo
 
 
 export const createSchoolController = async (req, res) => {
-  console.log("Function getAllSchools Execution Started");
+  console.log("Function createSchool Execution Started");
+  console.log("Function createSchool req ", req);
+  console.log("Function createSchool res", res);
+
   try {
-    const school = await createSchool();
+    const { name, address, registedStudents } = req.body;
+    const school = await createSchool(name, address, registedStudents);
 
     res
       .status(200)

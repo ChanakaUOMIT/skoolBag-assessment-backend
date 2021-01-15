@@ -1,9 +1,19 @@
+import mongoose from "mongoose";
 
-export const createSchool = async () => {
+//Model
+import School from "../../models/school.model.js"
+export const createSchool = async (name, address, registedStudents) => {
     console.log(`createSchool`);
     try {
-        const school = "school created";
-        return school;
+        const newSchool = new School({
+            _id: new mongoose.Types.ObjectId(),
+            name: name,
+            address: address,
+            registedStudents: registedStudents
+        });
+
+        const addSchool = await newSchool.save();
+        return addSchool;
     } catch (err) {
         throw err;
     }

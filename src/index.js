@@ -1,4 +1,6 @@
 import app from "./server.js";
+import("./database.js");
+
 // const express = require("express");
 // const app = express();
 // const port = 8080; // default port to listen
