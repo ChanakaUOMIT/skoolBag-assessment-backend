@@ -2,19 +2,27 @@ import mongoose from "mongoose";
 
 //Model
 import School from "../../models/school.model.js"
-export const createSchool = async (name, address, street, suburb, postcode, state, registedStudents) => {
+
+
+export const GetSchoolById = async (school_id) => {
+    console.log(`Getting school ${school_id}`);
+    try {
+        const school = await School.findById(school_id);
+        console.log(`GetSchoolById : `, school);
+
+        if (!school) throw Error("School not Exists:400");
+        return school;
+    } catch (err) {
+        throw Error("School not Exists:400");
+    }
+};
+export const createSchool = async (name, address, registedStudents) => {
     console.log(`createSchool`);
     try {
         const newSchool = new School({
             _id: new mongoose.Types.ObjectId(),
             name: name,
             address: address,
-            // address: {
-            // street: street,
-            // suburb: suburb,
-            // postcode: postcode,
-            // state: state,
-            // },
             registedStudents: registedStudents
         });
         console.log(`newSchool : `, newSchool);
@@ -44,11 +52,16 @@ export const getAllSchools = async (page = 1, limit = 10) => {
     }
 };
 
-export const updateSchool = async (id) => {
+export const updateSchool = async (id, name, address, registedStudents) => {
     console.log(`updateSchool ${id}`);
     try {
-        const schools = "updateSchool";
-        return schools;
+        const school = await GetSchoolById(id);
+
+        school.name = name;
+        school.address = address;
+        school.registedStudents = registedStudents;
+        await school.save();
+        return school;
     } catch (err) {
         throw err;
     }

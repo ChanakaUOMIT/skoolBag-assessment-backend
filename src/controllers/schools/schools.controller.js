@@ -12,9 +12,9 @@ export const createSchoolController = async (req, res) => {
   // console.log("Function createSchool res", res);
 
   try {
-    const { name, address, street, suburb, postcode, state, registedStudents } = req.body;
+    const { name, address, registedStudents } = req.body;
 
-    const school = await createSchool(name, address, street, suburb, postcode, state, registedStudents);
+    const school = await createSchool(name, address, registedStudents);
 
     res
       .status(200)
@@ -41,8 +41,9 @@ export const getAllSchoolsController = async (req, res) => {
 export const updateSchoolController = async (req, res) => {
   console.log("Function updateSchool Execution Started");
   try {
+    const { name, address, registedStudents } = req.body;
     const { id } = req.params;
-    const allSchools = await updateSchool(id);
+    const allSchools = await updateSchool(id, name, address, registedStudents);
 
     res
       .status(200)
