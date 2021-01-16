@@ -2,15 +2,23 @@ import mongoose from "mongoose";
 
 //Model
 import School from "../../models/school.model.js"
-export const createSchool = async (name, address, registedStudents) => {
+export const createSchool = async (name, address, street, suburb, postcode, state, registedStudents) => {
     console.log(`createSchool`);
     try {
         const newSchool = new School({
             _id: new mongoose.Types.ObjectId(),
             name: name,
             address: address,
+            // address: {
+            // street: street,
+            // suburb: suburb,
+            // postcode: postcode,
+            // state: state,
+            // },
             registedStudents: registedStudents
         });
+        console.log(`newSchool : `, newSchool);
+
 
         const addSchool = await newSchool.save();
         return addSchool;

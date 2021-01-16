@@ -8,12 +8,13 @@ import { createSchool, getAllSchools, updateSchool, deleteSchool } from "./schoo
 
 export const createSchoolController = async (req, res) => {
   console.log("Function createSchool Execution Started");
-  console.log("Function createSchool req ", req);
-  console.log("Function createSchool res", res);
+  console.log("Function createSchool req ", req.body);
+  // console.log("Function createSchool res", res);
 
   try {
-    const { name, address, registedStudents } = req.body;
-    const school = await createSchool(name, address, registedStudents);
+    const { name, address, street, suburb, postcode, state, registedStudents } = req.body;
+
+    const school = await createSchool(name, address, street, suburb, postcode, state, registedStudents);
 
     res
       .status(200)

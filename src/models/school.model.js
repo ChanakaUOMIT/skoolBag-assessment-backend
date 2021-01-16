@@ -11,8 +11,22 @@ const schoolSchema = new Schema(
             required: true,
         },
         address: {
-            type: String,
-            required: true,
+            street: {
+                type: String,
+                required: true
+            },
+            suburb: {
+                type: String,
+                required: true
+            },
+            postcode: {
+                type: String,
+                required: true
+            },
+            state: {
+                type: String,
+                required: true
+            }
         },
         registedStudents: {
             type: Number,
