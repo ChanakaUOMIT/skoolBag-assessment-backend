@@ -43,11 +43,11 @@ export const updateSchoolController = async (req, res) => {
   try {
     const { name, address, registedStudents } = req.body;
     const { id } = req.params;
-    const allSchools = await updateSchool(id, name, address, registedStudents);
+    const school = await updateSchool(id, name, address, registedStudents);
 
     res
       .status(200)
-      .json(PayloadResponse("Update Schools Success", allSchools));
+      .json(PayloadResponse("Update school Success", school));
   } catch (err) {
     console.error("updateSchool : err : ", err);
   }
@@ -57,11 +57,11 @@ export const deleteSchoolController = async (req, res) => {
   console.log("Function deleteSchool Execution Started");
   try {
     const { id } = req.params;
-    const allSchools = await deleteSchool(id);
+    const school = await deleteSchool(id);
 
     res
       .status(200)
-      .json(PayloadResponse("Delete Schools Success", allSchools));
+      .json(PayloadResponse("Delete Schools Success", school));
   } catch (err) {
     console.error("deleteSchool : err : ", err);
   }

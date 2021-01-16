@@ -71,8 +71,10 @@ export const updateSchool = async (id, name, address, registedStudents) => {
 export const deleteSchool = async (id) => {
     console.log(`deleteSchoolController ${id}`);
     try {
-        const schools = "deleteSchoolController";
-        return schools;
+        const school = await GetSchoolById(id);
+        await school.remove();
+
+        return school;
     } catch (err) {
         throw err;
     }
