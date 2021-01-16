@@ -27,10 +27,17 @@ export const createSchool = async (name, address, street, suburb, postcode, stat
     }
 };
 
-export const getAllSchools = async () => {
+export const getAllSchools = async (page = 1, limit = 10) => {
     console.log(`Getting All Schools`);
     try {
-        const schools = "All schools";
+        const query = {
+        };
+        const paginate_config = {
+            page: page,
+            limit: limit,
+            sort: { updatedAt: -1 },
+        };
+        const schools = await School.paginate(query, paginate_config);
         return schools;
     } catch (err) {
         throw err;

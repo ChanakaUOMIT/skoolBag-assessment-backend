@@ -27,7 +27,8 @@ export const createSchoolController = async (req, res) => {
 export const getAllSchoolsController = async (req, res) => {
   console.log("Function getAllSchools Execution Started");
   try {
-    const allSchools = await getAllSchools();
+    const { page = 1 } = req.query;
+    const allSchools = await getAllSchools(page);
 
     res
       .status(200)

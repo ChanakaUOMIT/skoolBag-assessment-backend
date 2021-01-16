@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
+import mongoosePaginate from 'mongoose-paginate-v2';
+
 const Schema = mongoose.Schema;
 
-const schoolSchema = new Schema(
+const SchoolSchema = new Schema(
     {
         _id: {
             type: mongoose.ObjectId,
@@ -38,5 +40,8 @@ const schoolSchema = new Schema(
     }
 );
 
+SchoolSchema.index({ name: 'text' });
+SchoolSchema.plugin(mongoosePaginate);
 
-export default mongoose.model("School", schoolSchema);
+
+export default mongoose.model("School", SchoolSchema);
