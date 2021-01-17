@@ -13,7 +13,7 @@ export const GetSchoolById = async (school_id) => {
         if (!school) throw Error("School not Exists:400");
         return school;
     } catch (err) {
-        throw Error("School not Exists:400");
+        throw err;
     }
 };
 export const createSchool = async (name, address, registedStudents) => {
@@ -43,7 +43,7 @@ export const getAllSchools = async (page = 1, limit = 10) => {
         const paginate_config = {
             page: page,
             limit: limit,
-            sort: { updatedAt: -1 },
+            sort: { createdAt: -1 },
         };
         const schools = await School.paginate(query, paginate_config);
         return schools;
@@ -73,6 +73,26 @@ export const deleteSchool = async (id) => {
     try {
         const school = await GetSchoolById(id);
         await school.remove();
+
+        return school;
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const searchSchools = async (keyword, page = 1, limit = 10) => {
+    console.log(`searchSchoolController : helper : `);
+    try {
+        const query = {
+            $text: { $search: keyword },
+        };
+
+        const paginate_config = {
+            page: page,
+            limit: limit,
+            sort: { createdAt: -1 },
+        };
+        const school = await School.paginate(query, paginate_config);
 
         return school;
     } catch (err) {

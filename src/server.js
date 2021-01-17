@@ -1,6 +1,6 @@
 import express from "express"
 import bodyParser from "body-parser";
-
+import cors from "cors"
 import schoolRoute from "./routes/school.routes.js"
 
 // Initializations
@@ -8,6 +8,7 @@ const app = express();
 
 // Parse application/json
 app.use(bodyParser.json());
+app.use(cors());
 
 // Settings
 app.set("port", 8080);

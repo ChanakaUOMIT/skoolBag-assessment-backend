@@ -1,8 +1,10 @@
 
 import {
   PayloadResponse,
+  GetErrorCode,
+  Exception
 } from "../../services/response.service.js";
-import { createSchool, getAllSchools, updateSchool, deleteSchool } from "./schools.helper.js";
+import { createSchool, getAllSchools, updateSchool, deleteSchool, searchSchools } from "./schools.helper.js";
 
 
 
@@ -64,5 +66,20 @@ export const deleteSchoolController = async (req, res) => {
       .json(PayloadResponse("Delete Schools Success", school));
   } catch (err) {
     console.error("deleteSchool : err : ", err);
+    res.status(GetErrorCode(err)).json(Exception(err));
+  }
+};
+
+
+export const searchSchoolController = async (req, res) => {
+  console.log("Function searchSchoolController Execution Started");
+  try {
+    const { keyword, page = 1 } = req.query;
+    const notes = await searchSchools(keyword, page);
+
+    res.status(200).json(PayloadResponse("Search school Success", notes));
+  } catch (err) {
+    console.error(err);
+    res.status(GetErrorCode(err)).json(Exception(err));
   }
 };
