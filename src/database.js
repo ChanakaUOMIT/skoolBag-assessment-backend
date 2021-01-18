@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import config from "./config.js";
 
-const MONGODB_URI = `mongodb://${config.MONGODB_HOST}/${config.MONGODB_DATABASE}`;
+const MONGODB_URI = `mongodb+srv://${config.MONGODB_HOST}/${config.MONGODB_DATABASE}`;
 
 mongoose
     .connect(MONGODB_URI, {
