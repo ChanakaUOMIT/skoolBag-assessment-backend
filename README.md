@@ -2,7 +2,7 @@
 
 This project is to build a REST API backend application that can be used to manage schools.
 
-Hosted web : [https://d390iqortngohx.cloudfront.net/](School Management Dashboard)
+Hosted web : [https://d390iqortngohx.cloudfront.net/](https://d390iqortngohx.cloudfront.net/)
 
 ## Table of Contents
 
