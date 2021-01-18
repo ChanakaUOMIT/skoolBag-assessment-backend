@@ -16,14 +16,14 @@ app.set("port", 8080);
 // Routes
 app.use("/api/school", schoolRoute);
 
-// // define a route handler for the default home page
-// app.get("/", (req, res) => {
-//     res.send("Hello world!");
-// });
+// define a route handler for the default home page
+app.get("/", (req, res) => {
+    res.send("School Management Dashboard..!");
+});
 
 // Data Validation Custom Response
 app.use((err, req, res, next) => {
-    if (false) {
+    if (err && err.error && err.error.isJoi) {
         res.status(400).json({
             errors: err.error.details.map((error) => {
                 return {
