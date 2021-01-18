@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-// import config from "./config.js";
+import config from "./config.js";
 
-const MONGODB_URI = `mongodb://${"localhost"}/${"school-app"}`;
+const MONGODB_URI = `mongodb://${config.MONGODB_HOST}/${config.MONGODB_DATABASE}`;
 
 mongoose
     .connect(MONGODB_URI, {

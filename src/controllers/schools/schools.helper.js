@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
-
 //Model
 import School from "../../models/school.model.js"
 
-
+/**
+ * Get school by ID
+ * @param {School Id} school_id 
+ */
 export const GetSchoolById = async (school_id) => {
     console.log(`Getting school ${school_id}`);
     try {
@@ -16,6 +18,13 @@ export const GetSchoolById = async (school_id) => {
         throw err;
     }
 };
+
+/**
+ * Create School
+ * @param {School name} name 
+ * @param {School Address} address 
+ * @param {Resisted students} registedStudents 
+ */
 export const createSchool = async (name, address, registedStudents) => {
     console.log(`createSchool`);
     try {
@@ -35,7 +44,12 @@ export const createSchool = async (name, address, registedStudents) => {
     }
 };
 
-export const getAllSchools = async (page = 1, limit = 10) => {
+/**
+ * Get All Schools
+ * @param {Current page} page 
+ * @param {pagination limit} limit 
+ */
+export const getAllSchools = async (page = 1, limit = 100) => {
     console.log(`Getting All Schools`);
     try {
         const query = {
@@ -52,6 +66,13 @@ export const getAllSchools = async (page = 1, limit = 10) => {
     }
 };
 
+/**
+ * Update school Details
+ * @param {school ID} id 
+ * @param {School Name} name 
+ * @param {School Address} address 
+ * @param {Registed students} registedStudents 
+ */
 export const updateSchool = async (id, name, address, registedStudents) => {
     console.log(`updateSchool ${id}`);
     try {
@@ -67,7 +88,10 @@ export const updateSchool = async (id, name, address, registedStudents) => {
     }
 };
 
-
+/**
+ * Delete School
+ * @param {Schhol ID} id 
+ */
 export const deleteSchool = async (id) => {
     console.log(`deleteSchoolController ${id}`);
     try {
@@ -80,8 +104,14 @@ export const deleteSchool = async (id) => {
     }
 };
 
-export const searchSchools = async (keyword, page = 1, limit = 10) => {
-    console.log(`searchSchoolController : helper : `);
+/**
+ * Search school by name and address
+ * @param {Search keyword} keyword 
+ * @param {current page} page 
+ * @param {pagination limit} limit 
+ */
+export const searchSchools = async (keyword, page = 1, limit = 100) => {
+    console.log(`searchSchoolController : helper : `, keyword);
     try {
         const query = {
             $text: { $search: keyword },
@@ -92,7 +122,10 @@ export const searchSchools = async (keyword, page = 1, limit = 10) => {
             limit: limit,
             sort: { createdAt: -1 },
         };
+        console.log("searchSchools ~ query ", query)
+
         const school = await School.paginate(query, paginate_config);
+        console.log("searchSchools ~ school", school)
 
         return school;
     } catch (err) {
